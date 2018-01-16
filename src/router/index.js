@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Home from '@/pages/Home';
 import AdminIndex from '@/pages/admin/AdminIndex';
 import AdminNew from '@/pages/admin/AdminNew';
+import AdminProducts from '@/pages/admin/AdminProducts';
+import AdminEdit from '@/pages/admin/AdminEdit';
 import Cart from '@/pages/Cart';
 
 Vue.use(Router);
@@ -22,20 +24,20 @@ export default new Router({
       // Child routes
       children: [
         {
+          path: 'products', /* default landing page of admin */
+          name: 'Products',
+          component: AdminProducts,
+        },
+        {
           path: 'new',
           name: 'New',
           component: AdminNew,
         },
-        /*{
-          path: '',
-          name: 'Products',
-          component: Products
-        },
         {
           path: 'edit/:id',
           name: 'Edit',
-          component: Edit
-        }*/
+          component: AdminEdit,
+        },
       ],
     },
     {

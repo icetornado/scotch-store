@@ -1,19 +1,14 @@
 <template>
   <div>
     <div class="title">
-      <h1>{{msg}}</h1>
+      <h1>This is Admin/Products</h1>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'admin',
-    data() {
-      return {
-        msg: 'Admin page',
-      };
-    },
+    name: 'admin-products',
   };
 </script>
 

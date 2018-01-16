@@ -9,6 +9,10 @@
 <script>
   export default {
     name: 'admin-new',
+    saveProduct() {
+      // prints all the errors
+      console.log(this.errors);
+    },
   };
 </script>
 

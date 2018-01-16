@@ -1,22 +1,23 @@
 <template>
   <div id="app">
-    <div class="col-sm-12">
+    <div class="container-fluid">
       <img src="./assets/logo.png">
     </div>
 
+    <div class="container-fluid">
+      <ul class="nav nav-pills navbar navbar-dark bg-primary">
+        <li class="nav-item">
+          <router-link to="/" class="nav-item nav-link route-link">Home</router-link>
+        </li>
 
-    <nav class="navbar navbar-light bg-faded">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav mr-auto">
-            <!-- Navigation Links -->
-            <router-link to="/" class="nav-item nav-link route-link">Home</router-link>
-            <router-link to="/admin" class="nav-item nav-link route-link">Admin</router-link>
-            <router-link to="/cart" class="nav-item nav-link route-link">Cart</router-link>
-          </div>
-        </div>
-      </div>
-    </nav>
+        <li class="nav-item">
+          <router-link class="nav-link route-link" to="/admin/products">Admin</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/cart" class="nav-item nav-link route-link">Cart</router-link>
+        </li>
+      </ul>
+    </div>
 
     <router-view/>
   </div>
@@ -46,6 +47,16 @@ export default {
 .route-link {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 20px;
-  padding: 0 10px 0 10px;
+  padding: 10px 10px 0 10px;
+  color: azure;
+}
+
+  .navbar {
+    min-height: 30px;
+  }
+
+.form-control.error {
+  border-color: #FF3333;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 71, 71, 0.6);
 }
 </style>
