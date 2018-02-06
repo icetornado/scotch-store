@@ -29,13 +29,28 @@ export default new Router({
           component: AdminProducts,
         },
         {
-          path: 'new',
-          name: 'New',
+          path: 'products/new',
+          name: 'New Product',
           component: AdminNew,
         },
         {
-          path: 'edit/:id',
-          name: 'Edit',
+          path: 'products/edit/:id',
+          name: 'Edit Product',
+          component: AdminEdit,
+        },
+        {
+          path: 'manufacturers',
+          name: 'Manufacturers List',
+          component: AdminEdit,
+        },
+        {
+          path: 'manufacturers/new',
+          name: 'New Manufacturer',
+          component: AdminEdit,
+        },
+        {
+          path: 'manufacturers/edit/:id',
+          name: 'Edit Manufacturer',
           component: AdminEdit,
         },
       ],
