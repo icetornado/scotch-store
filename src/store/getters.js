@@ -31,7 +31,7 @@ export const manufacturerGetters = {
     return state.manufacturers;
   },
   manufacturerById: (state, getters) => (id) => {
-    if (getters.allManufacturers.length > 0) {
+    if (state.manufacturers.length > 0) {
       console.log('hello');
       // eslint-disable-next-line
       const manuArr = getters.allManufacturers.filter(m => m._id === id);
@@ -43,8 +43,10 @@ export const manufacturerGetters = {
       }
       console.log('manufacturer 0', manufacturer);
       return manufacturer;
+      // eslint-disable-next-line
+    } else {
+      return state.manufacturer;
     }
-    return state.manufacturer;
   },
 };
 

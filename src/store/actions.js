@@ -19,11 +19,15 @@ import {
   UPDATE_MANUFACTURER,
   UPDATE_MANUFACTURER_SUCCESS,
   UPDATE_MANUFACTURER_FAILURE,
+  MANUFACTURER_BY_ID,
+  MANUFACTURER_BY_ID_SUCCESS,
+  MANUFACTURER_BY_ID_FAILURE,
+  DELETE_MANUFACTURER,
+  DELETE_MANUFACTURER_SUCCESS,
+  DELETE_MANUFACTURER_FAILURE,
 } from './mutation-types';
 
 const API_BASE = constants.default;
-console.log('constant here', constants);
-console.log('all product', ALL_PRODUCTS);
 
 export const productActions = {
   allProducts({ commit }) {
@@ -72,7 +76,18 @@ export const manufacturerActions = {
       commit(ALL_MANUFACTURERS_SUCCESS, response.data);
     });
   },
+  manufacturerById({ commit }, payload) {
+    commit(MANUFACTURER_BY_ID);
+    axios.get(`${API_BASE}/manufacturers/${payload}`).then((response) => {
+      console.log('get manu by id');
+      console.log(payload, response.data);
+      commit(MANUFACTURER_BY_ID_SUCCESS, response.data);
+    }).catch((reason) => {
+      commit(MANUFACTURER_BY_ID_FAILURE, reason);
+    });
+  },
   updateManufacturer({ commit }, payload) {
+    console.log('update manufac with payload', payload);
     commit(UPDATE_MANUFACTURER);
     // eslint-disable-next-line
     axios.put(`${API_BASE}/manufacturers/${payload._id}`, payload).then((response) => {
@@ -87,6 +102,14 @@ export const manufacturerActions = {
       commit(ADD_MANUFACTURER_SUCCESS, response.data);
     }).catch((reason) => {
       commit(ADD_MANUFACTURER_FAILURE, reason);
+    });
+  },
+  deleteManufacturer({ commit }, payload) {
+    commit(DELETE_MANUFACTURER);
+    axios.delete(`${API_BASE}/manufacturers/${payload}`, payload).then((response) => {
+      commit(DELETE_MANUFACTURER_SUCCESS, response.data);
+    }).catch((reason) => {
+      commit(DELETE_MANUFACTURER_FAILURE, reason);
     });
   },
 };

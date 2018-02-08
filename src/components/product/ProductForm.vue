@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-  <form>
+  <form v-on:submit.prevent>
       <div class="form-group row">
         <label>Name</label>
         <input type="text" placeholder="Name" v-model="model.name" v-validate="'required'" name="name" :class="{'form-control': true, 'error': errors.has('name') }" />
@@ -32,23 +32,14 @@
         <span class="small text-danger" v-show="errors.has('description')">Description is required</span>
       </div>
       <div class="form-group row">
-        <div v-if="isEditing">
           <button class="button badge-pill" v-on:click.prevent="saveProduct">&nbsp;
-            <span class="oi oi-check"></span>
-            Update
+            <span v-if="isEditing"><span class="oi oi-check"></span>Update</span>
+            <span v-else><span class="oi oi-plus"></span>Add</span>
           </button>
-          <button class="button badge-pill" v-on:click.prevent="deleteProduct">&nbsp;
+          <button class="button badge-pill" v-if="isEditing" v-on:click.prevent="deleteProduct">&nbsp;
             <span class="oi oi-trash"></span>
             Delete
           </button>
-        </div>
-        <div v-else>
-          <button class="button badge-pill">
-            <span class="oi oi-plus" v-on:click.prevent="saveProduct"></span>&nbsp;
-            Add Product
-          </button>
-        </div>
-
       </div>
 
   </form>
@@ -66,7 +57,7 @@
     props: ['model', 'manufacturers', 'isEditing'],
     methods: {
       saveProduct() {
-        console.log('model in form', this.model);
+        console.log('save model in form', this.model);
         console.log('errors:', this.errors);
 
         /* if (this.errors.items.length === 0) {
@@ -82,6 +73,9 @@
             content: 'Please ensure the form is valid.',
           });
         });
+      },
+      deleteProduct() {
+        console.log('delete a product');
       },
     },
   };

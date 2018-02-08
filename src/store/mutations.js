@@ -5,6 +5,7 @@
 import {
   ADD_PRODUCT,
   ADD_PRODUCT_SUCCESS,
+  ADD_PRODUCT_FAILURE,
   PRODUCT_BY_ID,
   PRODUCT_BY_ID_SUCCESS,
   UPDATE_PRODUCT,
@@ -17,10 +18,14 @@ import {
   ALL_PRODUCTS_SUCCESS,
   ALL_MANUFACTURERS,
   ALL_MANUFACTURERS_SUCCESS,
+  MANUFACTURER_BY_ID,
+  MANUFACTURER_BY_ID_SUCCESS,
   ADD_MANUFACTURER,
   ADD_MANUFACTURER_SUCCESS,
   UPDATE_MANUFACTURER,
   UPDATE_MANUFACTURER_SUCCESS,
+  DELETE_MANUFACTURER,
+  DELETE_MANUFACTURER_SUCCESS,
   ERROR_MSG,
 } from './mutation-types';
 
@@ -46,6 +51,9 @@ export const productMutations = {
   [ADD_PRODUCT_SUCCESS]: (state, payload) => {
     state.showLoader = false;
     state.products.push(payload);
+  },
+  [ADD_PRODUCT_FAILURE]: (state) => {
+    state.showLoader = false;
   },
   [UPDATE_PRODUCT]: (state) => {
     state.showLoader = true;
@@ -101,6 +109,13 @@ export const manufacturerMutations = {
     state.showLoader = false;
     state.manufacturers = payload;
   },
+  [MANUFACTURER_BY_ID](state) {
+    state.showLoader = true;
+  },
+  [MANUFACTURER_BY_ID_SUCCESS](state, payload) {
+    state.showLoader = false;
+    state.product = payload;
+  },
   // eslint-disable-next-line
   [ADD_MANUFACTURER]: (state, payload) => {
     state.showLoader = true;
@@ -118,5 +133,26 @@ export const manufacturerMutations = {
   [UPDATE_MANUFACTURER_SUCCESS]: (state, payload) => {
     state.showLoader = false;
     // state.manufacturers.push(payload);
+    state.manufacturer = payload;
+    state.manufacturers = state.manufacturers.map((m) => {
+      // eslint-disable-next-line
+      if (m._id === payload._id) {
+        // eslint-disable-next-line
+        // payload = {...payload, m.name: payload.name};
+        return payload;
+      }
+      return m;
+    });
+  },
+  [DELETE_MANUFACTURER]: (state) => {
+    console.log('delete manu');
+    state.showLoader = true;
+  },
+  [DELETE_MANUFACTURER_SUCCESS]: (state, payload) => {
+    console.log('delete manu success', payload);
+    // eslint-disable-next-line
+    const index = state.manufacturers.findIndex(m => m._id === payload);
+    state.manufacturers.splice(index, 1);
+    state.showLoader = false;
   },
 };

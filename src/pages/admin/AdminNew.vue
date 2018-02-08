@@ -16,10 +16,6 @@
       };
     },
     created() {
-      if (!this.model.name) {
-        console.log('dispatched');
-        this.$store.dispatch('productById', this.$route.params.id);
-      }
       if (this.manufacturers.length === 0) {
         this.$store.dispatch('allManufacturers');
       }
