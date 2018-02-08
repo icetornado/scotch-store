@@ -17,6 +17,10 @@ import {
   ALL_PRODUCTS_SUCCESS,
   ALL_MANUFACTURERS,
   ALL_MANUFACTURERS_SUCCESS,
+  ADD_MANUFACTURER,
+  ADD_MANUFACTURER_SUCCESS,
+  UPDATE_MANUFACTURER,
+  UPDATE_MANUFACTURER_SUCCESS,
   ERROR_MSG,
 } from './mutation-types';
 
@@ -36,30 +40,32 @@ export const productMutations = {
     state.showLoader = false;
     state.product = payload;
   },
-  // eslint-disable-next-line
-  [ADD_PRODUCT]: (state, payload) => {
+  [ADD_PRODUCT]: (state) => {
     state.showLoader = true;
   },
   [ADD_PRODUCT_SUCCESS]: (state, payload) => {
     state.showLoader = false;
     state.products.push(payload);
   },
-  [UPDATE_PRODUCT]: (state, payload) => {
-    console.log('payload in update product', payload);
+  [UPDATE_PRODUCT]: (state) => {
     state.showLoader = true;
   },
   [UPDATE_PRODUCT_SUCCESS]: (state, payload) => {
     state.showLoader = false;
+    // console.log('payload in update product success', payload);
+    // console.log('products in state before map', state.products);
     state.products = state.products.map((p) => {
-      if (p.id === payload.id) {
+      // console.log('p in update product success', p);
+      // eslint-disable-next-line
+      if (p._id === payload._id) {
         // eslint-disable-next-line
         payload = {...payload,manufacturer: state.manufacturers.filter(x => x._id === payload.manufacturer)[0]
         };
         return payload;
       }
-
       return p;
     });
+    // console.log('products in state after map', state.products);
   },
   // eslint-disable-next-line
   [REMOVE_PRODUCT]: (state, payload) => {
@@ -77,7 +83,8 @@ export const productMutations = {
 };
 
 export const cartMutations = {
-  [ADD_TO_CART]: (state, payload) => state.cart.push(payload),
+  // eslint-disable-next-line
+  [ADD_TO_CART]: (state, payload) => state.cart.push(payload._id),
   [REMOVE_FROM_CART]: (state, payload) => {
     // eslint-disable-next-line
     const index = state.cart.findIndex(p => p._id === payload);
@@ -93,5 +100,23 @@ export const manufacturerMutations = {
   [ALL_MANUFACTURERS_SUCCESS](state, payload) {
     state.showLoader = false;
     state.manufacturers = payload;
+  },
+  // eslint-disable-next-line
+  [ADD_MANUFACTURER]: (state, payload) => {
+    state.showLoader = true;
+  },
+  // eslint-disable-next-line
+  [ADD_MANUFACTURER_SUCCESS]: (state, payload) => {
+    state.showLoader = false;
+    state.manufacturers.push(payload);
+  },
+  [UPDATE_MANUFACTURER]: (state) => {
+    console.log('payload in update manufacturer');
+    state.showLoader = true;
+  },
+  // eslint-disable-next-line
+  [UPDATE_MANUFACTURER_SUCCESS]: (state, payload) => {
+    state.showLoader = false;
+    // state.manufacturers.push(payload);
   },
 };

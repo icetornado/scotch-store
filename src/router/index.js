@@ -6,6 +6,8 @@ import AdminNew from '@/pages/admin/AdminNew';
 import AdminProducts from '@/pages/admin/AdminProducts';
 import AdminEdit from '@/pages/admin/AdminEdit';
 import Cart from '@/pages/Cart';
+import ManufacturerList from '@/pages/admin/AdminManuList';
+import ManufacturerForm from '../components/manufacturer/ManufacturerForm';
 
 Vue.use(Router);
 
@@ -41,17 +43,17 @@ export default new Router({
         {
           path: 'manufacturers',
           name: 'Manufacturers List',
-          component: AdminEdit,
+          component: ManufacturerList,
         },
         {
           path: 'manufacturers/new',
           name: 'New Manufacturer',
-          component: AdminEdit,
+          component: ManufacturerForm,
         },
         {
           path: 'manufacturers/edit/:id',
           name: 'Edit Manufacturer',
-          component: AdminEdit,
+          component: ManufacturerForm,
         },
       ],
     },

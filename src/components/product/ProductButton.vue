@@ -1,14 +1,14 @@
 <template>
   <div>
     <div v-if="isadmin">
-      <button class="button" >
-        <router-link :to="'/admin/edit/'+product._id" class="product-link">
-          <i class="fa fa-cart-plus"></i>Edit
+      <button class="button badge-pill badge-secondary" >
+        <router-link :to="'/admin/products/edit/'+product._id">
+          <span class="oi oi-pencil"></span>&nbsp;Edit
         </router-link>
       </button>
     </div>
     <div v-else>
-      <button class="button" @click="addToCart"><i class="fa fa-cart-plus"></i> Add to Cart</button>
+      <button class="button badge-pill badge-primary" @click="addToCart"><span class="oi oi-cart"></span>&nbsp;Add to Cart</button>
       <!--
       <button v-if="isAdding" class="button" @click="addToCart"><i class="fa fa-cart-plus"></i> Add to Cart</button>
       <button v-else class="button button-danger" @click="removeFromCart(product._id)"><i class="fa fa-trash"></i> Remove from Cart</button>

@@ -38,7 +38,7 @@
     },
     methods: {
       updateProduct(model) {
-        console.log('model in new', model);
+        console.log('model in edit', model);
         this.$store.dispatch('updateProduct', model);
       },
     },

@@ -30,6 +30,22 @@ export const manufacturerGetters = {
     console.log('state manu', state.manufacturers);
     return state.manufacturers;
   },
+  manufacturerById: (state, getters) => (id) => {
+    if (getters.allManufacturers.length > 0) {
+      console.log('hello');
+      // eslint-disable-next-line
+      const manuArr = getters.allManufacturers.filter(m => m._id === id);
+      console.log('manu arr', manuArr);
+      let manufacturer = {};
+      if (manuArr.length > 0) {
+        console.log('greater than 0');
+        manufacturer = manuArr[0];
+      }
+      console.log('manufacturer 0', manufacturer);
+      return manufacturer;
+    }
+    return state.manufacturer;
+  },
 };
 
 export const counterGetter = {

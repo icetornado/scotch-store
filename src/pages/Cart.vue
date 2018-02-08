@@ -7,7 +7,7 @@
       <div class="row">
         <template v-for="product in cartList">
 
-            <div class="col-sm-3" style="text-align: left;">
+            <div class="col-sm-3 border m-2 p-2" style="text-align: left;">
               <div>Name: <span class="badge badge-pill badge-primary">{{product.name}}</span></div>
               <div>Price: <span class="badge badge-pill badge-success">{{product.price}}</span></div>
               <div>Quantity: <span class="badge badge-pill badge-danger">{{product.count}}</span></div>
@@ -35,17 +35,18 @@
       // eslint-disable-next-line
       cartList: function () {
         const cart = this.$store.state.cart.reduce((tally, item) => {
-          console.log('item', item);
           // eslint-disable-next-line
-          if(typeof tally[item._id] === 'undefined') {
+          if(typeof tally[item] === 'undefined') {
+            // get actual product
             // eslint-disable-next-line
-            tally[item._id] = Object.assign({}, item);
+            const product = this.$store.getters.productById(item);
             // eslint-disable-next-line
-            tally[item._id].count = 0;
+            tally[item] = Object.assign({}, product);
+            // eslint-disable-next-line
+            tally[item].count = 0;
           }
           // eslint-disable-next-line
-          tally[item._id].count += 1;
-          // tally[item._id] = (tally[item._id] || 0) + 1;
+          tally[item].count += 1;
           return tally;
         }, {});
         console.log('consolidate cart', cart);

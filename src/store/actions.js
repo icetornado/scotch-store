@@ -13,6 +13,12 @@ import {
   ALL_PRODUCTS_SUCCESS,
   ALL_MANUFACTURERS,
   ALL_MANUFACTURERS_SUCCESS,
+  ADD_MANUFACTURER,
+  ADD_MANUFACTURER_SUCCESS,
+  ADD_MANUFACTURER_FAILURE,
+  UPDATE_MANUFACTURER,
+  UPDATE_MANUFACTURER_SUCCESS,
+  UPDATE_MANUFACTURER_FAILURE,
 } from './mutation-types';
 
 const API_BASE = constants.default;
@@ -43,8 +49,10 @@ export const productActions = {
   },
   updateProduct({ commit }, payload) {
     commit(UPDATE_PRODUCT);
+    console.log('AFTER commit update product');
     // eslint-disable-next-line
     axios.put(`${API_BASE}/products/${payload._id}`, payload).then((response) => {
+      console.log('before commit update success', response.data);
       commit(UPDATE_PRODUCT_SUCCESS, response.data);
     });
   },
@@ -62,6 +70,23 @@ export const manufacturerActions = {
     commit(ALL_MANUFACTURERS);
     axios.get(`${API_BASE}/manufacturers`).then((response) => {
       commit(ALL_MANUFACTURERS_SUCCESS, response.data);
+    });
+  },
+  updateManufacturer({ commit }, payload) {
+    commit(UPDATE_MANUFACTURER);
+    // eslint-disable-next-line
+    axios.put(`${API_BASE}/manufacturers/${payload._id}`, payload).then((response) => {
+      commit(UPDATE_MANUFACTURER_SUCCESS, response.data);
+    }).catch((reason) => {
+      commit(UPDATE_MANUFACTURER_FAILURE, reason);
+    });
+  },
+  addManufacturer({ commit }, payload) {
+    commit(ADD_MANUFACTURER);
+    axios.post(`${API_BASE}/manufacturers`, payload).then((response) => {
+      commit(ADD_MANUFACTURER_SUCCESS, response.data);
+    }).catch((reason) => {
+      commit(ADD_MANUFACTURER_FAILURE, reason);
     });
   },
 };

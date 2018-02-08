@@ -4,8 +4,7 @@
     <div class="product">
       <router-link :to="'/details/'+product._id" class="product-link">
         <div class="product__image">
-          <img
-            class="img-responsive" :src="product.image" alt="">
+          <img class="img-responsive" :src="product.image" alt="">
         </div>
         <div class="product__description">
           <div class="product__info">

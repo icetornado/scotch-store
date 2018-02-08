@@ -15,6 +15,7 @@ export default new Vuex.Store({
     product: {},
     products: [],
     manufacturers: [],
+    manufacturer: {},
     counter: 0,
   },
   /* getters: {

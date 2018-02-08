@@ -20,14 +20,23 @@
     </div>
 
     <router-view/>
+    <!--
+    <div class="overlay" v-show="showLoader">
+      <div class="loading-spinner">
+        <div class="dot dotOne"></div>
+        <div class="dot dotTwo"></div>
+        <div class="dot dotThree"></div>
+      </div>
+    </div>
+    -->
   </div>
 
 </template>
 
 <script>
 import 'bootstrap/dist/css/bootstrap.css';
-
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import './assets/open-iconic/font/css/open-iconic-bootstrap.min.css';
 
 export default {
   name: 'app',
@@ -51,9 +60,8 @@ export default {
 
 .route-link {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 40px;
   padding: 10px 10px 0 10px;
-  color: azure;
 }
 
 .route-link-active {
