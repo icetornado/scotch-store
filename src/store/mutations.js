@@ -24,6 +24,7 @@ import {
   ADD_MANUFACTURER_SUCCESS,
   UPDATE_MANUFACTURER,
   UPDATE_MANUFACTURER_SUCCESS,
+  UPDATE_MANUFACTURER_FAILURE,
   DELETE_MANUFACTURER,
   DELETE_MANUFACTURER_SUCCESS,
   ERROR_MSG,
@@ -143,6 +144,11 @@ export const manufacturerMutations = {
       }
       return m;
     });
+  },
+  // eslint-disable-next-line
+  [UPDATE_MANUFACTURER_FAILURE]: (state, payload) => {
+    state.showLoader = false;
+    console.log('Failed to update');
   },
   [DELETE_MANUFACTURER]: (state) => {
     console.log('delete manu');

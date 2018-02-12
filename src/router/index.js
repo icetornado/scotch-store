@@ -7,7 +7,10 @@ import AdminProducts from '@/pages/admin/AdminProducts';
 import AdminEdit from '@/pages/admin/AdminEdit';
 import Cart from '@/pages/Cart';
 import ManufacturerList from '@/pages/admin/AdminManuList';
-import ManufacturerForm from '../components/manufacturer/ManufacturerForm';
+import ManufacturerForm from '@/components/manufacturer/ManufacturerForm';
+import Callback from '@/components/callback';
+// eslint-disable-next-line
+import { requireAuth } from '../../utils/auth';
 
 Vue.use(Router);
 
@@ -19,9 +22,15 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/callback',
+      name: 'Callback',
+      component: Callback,
+    },
+    {
       path: '/admin',
       name: 'Admin',
       component: AdminIndex,
+      beforeEnter: requireAuth,
 
       // Child routes
       children: [
@@ -63,4 +72,5 @@ export default new Router({
       component: Cart,
     },
   ],
+  mode: 'history',
 });

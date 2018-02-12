@@ -3,22 +3,7 @@
     <div class="container-fluid">
       <img src="./assets/logo.png">
     </div>
-
-    <div class="container-fluid">
-      <ul class="nav navbar bg-info">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link text-white">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/cart" class="nav-link text-white">Cart <span class="badge badge-light">{{cartCount > 0 ? cartCount: ''}}</span></router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link text-white" to="/admin/products">Admin</router-link>
-        </li>
-
-      </ul>
-    </div>
-
+    <nav-app></nav-app>
     <router-view/>
     <!--
     <div class="overlay" v-show="showLoader">
@@ -37,14 +22,11 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import './assets/open-iconic/font/css/open-iconic-bootstrap.min.css';
+import NavApp from './components/NavApp';
 
 export default {
+  components: { NavApp },
   name: 'app',
-  computed: {
-    cartCount() {
-      return this.$store.state.cart.length;
-    },
-  },
 };
 </script>
 

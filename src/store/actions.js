@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAccessToken } from '../../utils/auth';
 import * as constants from '../config';
 import {
   ADD_PRODUCT,
@@ -27,6 +28,7 @@ import {
   DELETE_MANUFACTURER_FAILURE,
 } from './mutation-types';
 
+
 const API_BASE = constants.default;
 
 export const productActions = {
@@ -47,7 +49,7 @@ export const productActions = {
   },
   addProduct({ commit }, payload) {
     commit(ADD_PRODUCT);
-    axios.post(`${API_BASE}/products`, payload).then((response) => {
+    axios.post(`${API_BASE}/products`, payload, { headers: { Authorization: `Bearer ${getAccessToken()}` } }).then((response) => {
       commit(ADD_PRODUCT_SUCCESS, response.data);
     });
   },
@@ -55,15 +57,15 @@ export const productActions = {
     commit(UPDATE_PRODUCT);
     console.log('AFTER commit update product');
     // eslint-disable-next-line
-    axios.put(`${API_BASE}/products/${payload._id}`, payload).then((response) => {
+    axios.put(`${API_BASE}/products/${payload._id}`, payload, { headers: { Authorization: `Bearer ${getAccessToken()}` } }).then((response) => {
       console.log('before commit update success', response.data);
       commit(UPDATE_PRODUCT_SUCCESS, response.data);
     });
   },
   removeProduct({ commit }, payload) {
     commit(REMOVE_PRODUCT);
-    axios.delete(`${API_BASE}/products/${payload}`, payload).then((response) => {
-      console.debug('response', response.data);
+    axios.delete(`${API_BASE}/products/${payload}`, { headers: { Authorization: `Bearer ${getAccessToken()}` } }).then((response) => {
+      console.debug('remove response', response.data);
       commit(REMOVE_PRODUCT_SUCCESS, response.data);
     });
   },
@@ -90,7 +92,7 @@ export const manufacturerActions = {
     console.log('update manufac with payload', payload);
     commit(UPDATE_MANUFACTURER);
     // eslint-disable-next-line
-    axios.put(`${API_BASE}/manufacturers/${payload._id}`, payload).then((response) => {
+    axios.put(`${API_BASE}/manufacturers/${payload._id}`, payload, { headers: { Authorization: `Bearer ${getAccessToken()}` } }).then((response) => {
       commit(UPDATE_MANUFACTURER_SUCCESS, response.data);
     }).catch((reason) => {
       commit(UPDATE_MANUFACTURER_FAILURE, reason);
@@ -98,7 +100,7 @@ export const manufacturerActions = {
   },
   addManufacturer({ commit }, payload) {
     commit(ADD_MANUFACTURER);
-    axios.post(`${API_BASE}/manufacturers`, payload).then((response) => {
+    axios.post(`${API_BASE}/manufacturers`, payload, { headers: { Authorization: `Bearer ${getAccessToken()}` } }).then((response) => {
       commit(ADD_MANUFACTURER_SUCCESS, response.data);
     }).catch((reason) => {
       commit(ADD_MANUFACTURER_FAILURE, reason);
@@ -106,7 +108,7 @@ export const manufacturerActions = {
   },
   deleteManufacturer({ commit }, payload) {
     commit(DELETE_MANUFACTURER);
-    axios.delete(`${API_BASE}/manufacturers/${payload}`, payload).then((response) => {
+    axios.delete(`${API_BASE}/manufacturers/${payload}`, { headers: { Authorization: `Bearer ${getAccessToken()}` } }).then((response) => {
       commit(DELETE_MANUFACTURER_SUCCESS, response.data);
     }).catch((reason) => {
       commit(DELETE_MANUFACTURER_FAILURE, reason);

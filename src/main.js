@@ -6,6 +6,7 @@ import VeeValidate from 'vee-validate';
 import App from './App';
 import router from './router';
 import store from './store';
+import NavApp from './components/NavApp';
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
@@ -17,6 +18,6 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App },
+  components: { App, NavApp },
 });
 
