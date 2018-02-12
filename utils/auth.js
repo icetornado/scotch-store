@@ -1,6 +1,7 @@
 import decode from 'jwt-decode';
 import auth0 from 'auth0-js';
 import Router from 'vue-router';
+import store from '../src/store';
 // import router from '../src/router/index';
 
 // import Auth0Lock from 'auth0-lock';
@@ -70,17 +71,16 @@ function isTokenExpired(token) {
 export function logout() {
   clearIdToken();
   clearAccessToken();
+  store.dispatch('loggedOut');
   router.go('/');
 }
 
 export function getIdToken() {
-  console.log('get ID TOken', localStorage.getItem(ID_TOKEN_KEY));
   return localStorage.getItem(ID_TOKEN_KEY);
 }
 
 export function isLoggedIn() {
   const idToken = getIdToken();
-  console.log('loggn token', idToken);
   return !!idToken && !isTokenExpired(idToken);
 }
 
@@ -109,4 +109,7 @@ export function setAccessToken() {
 export function setIdToken() {
   const idToken = getParameterByName('id_token');
   localStorage.setItem(ID_TOKEN_KEY, idToken);
+  // store.dispatch(SET_LOGIN_STATE);
+  // console.log('set id token here', idToken);
+  store.dispatch('loggedIn');
 }

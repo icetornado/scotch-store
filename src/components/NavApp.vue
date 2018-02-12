@@ -8,7 +8,7 @@
         <router-link to="/cart" class="nav-link text-white">Cart <span class="badge badge-light">{{cartCount > 0 ? cartCount: ''}}</span></router-link>
       </li>
       <li class="nav-item">
-        <router-link v-if="isLoggedIn()" class="nav-link text-white" to="/admin/products">Admin</router-link>
+        <router-link v-show="isLogged" class="nav-link text-white" to="/admin/products">Admin</router-link>
       </li>
 
       <li>
@@ -31,6 +31,9 @@
     computed: {
       cartCount() {
         return this.$store.state.cart.length;
+      },
+      isLogged() {
+        return this.$store.state.isLoggedIn;
       },
     },
     methods: {

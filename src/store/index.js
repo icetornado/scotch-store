@@ -1,9 +1,9 @@
 // ./src/store/index
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { productGetters, manufacturerGetters, counterGetter } from './getters';
-import { productMutations, cartMutations, manufacturerMutations } from './mutations';
-import { productActions, manufacturerActions } from './actions';
+import { productGetters, manufacturerGetters, counterGetter, isLoggedInGetter } from './getters';
+import { productMutations, cartMutations, manufacturerMutations, loggingInMutations } from './mutations';
+import { productActions, manufacturerActions, loggedInActions } from './actions';
 
 Vue.use(Vuex);
 
@@ -17,6 +17,7 @@ export default new Vuex.Store({
     manufacturers: [],
     manufacturer: {},
     counter: 0,
+    isLoggedIn: false,
   },
   /* getters: {
     counter: state => state.counter,
@@ -28,7 +29,8 @@ export default new Vuex.Store({
       state.counter += n;
     },
   }, */
-  getters: Object.assign({}, productGetters, manufacturerGetters, counterGetter),
-  actions: Object.assign({}, productActions, manufacturerActions),
-  mutations: Object.assign({}, productMutations, cartMutations, manufacturerMutations),
+  getters: Object.assign({}, productGetters, manufacturerGetters, counterGetter, isLoggedInGetter),
+  actions: Object.assign({}, productActions, manufacturerActions, loggedInActions),
+  // eslint-disable-next-line
+  mutations: Object.assign({}, productMutations, cartMutations, manufacturerMutations, loggingInMutations),
 });

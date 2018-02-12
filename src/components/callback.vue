@@ -4,6 +4,8 @@
 
 <script>
   import { setIdToken, setAccessToken } from '../../utils/auth';
+  // eslint-disable-next-line
+  import Router from '../router';
 
   export default {
     name: '',
@@ -11,8 +13,10 @@
       this.$nextTick(() => {
         setAccessToken();
         setIdToken();
-        window.location.href = '/';
-        // this.$router.push('/');
+        console.log('this store', this.$store);
+        // window.location.href = '/';
+        this.$router.push('/');
+        // Router.push('/');
       });
     },
   };

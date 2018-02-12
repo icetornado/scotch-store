@@ -26,6 +26,8 @@ import {
   DELETE_MANUFACTURER,
   DELETE_MANUFACTURER_SUCCESS,
   DELETE_MANUFACTURER_FAILURE,
+  SET_LOGIN_STATE,
+  SET_LOGOUT_STATE,
 } from './mutation-types';
 
 
@@ -113,5 +115,14 @@ export const manufacturerActions = {
     }).catch((reason) => {
       commit(DELETE_MANUFACTURER_FAILURE, reason);
     });
+  },
+};
+
+export const loggedInActions = {
+  loggedIn({ commit }) {
+    commit(SET_LOGIN_STATE);
+  },
+  loggedOut({ commit }) {
+    commit(SET_LOGOUT_STATE);
   },
 };

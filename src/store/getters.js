@@ -53,3 +53,7 @@ export const manufacturerGetters = {
 export const counterGetter = {
   counter: state => state.counter,
 };
+
+export const isLoggedInGetter = {
+  isLoggedIn: state => state.isLoggedIn,
+};

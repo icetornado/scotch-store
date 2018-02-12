@@ -28,7 +28,12 @@ import {
   DELETE_MANUFACTURER,
   DELETE_MANUFACTURER_SUCCESS,
   ERROR_MSG,
+  SET_LOGIN_STATE,
+  SET_LOGOUT_STATE,
+  // GET_LOGIN_STATE,
 } from './mutation-types';
+
+import { isLoggedIn } from '../../utils/auth';
 
 export const productMutations = {
   [ALL_PRODUCTS](state) {
@@ -161,4 +166,16 @@ export const manufacturerMutations = {
     state.manufacturers.splice(index, 1);
     state.showLoader = false;
   },
+};
+
+export const loggingInMutations = {
+  [SET_LOGIN_STATE]: (state) => {
+    console.log('set login state here');
+    state.isLoggedIn = isLoggedIn();
+  },
+  [SET_LOGOUT_STATE]: (state) => {
+    console.log('set logout state here');
+    state.isLoggedIn = isLoggedIn();
+  },
+
 };
