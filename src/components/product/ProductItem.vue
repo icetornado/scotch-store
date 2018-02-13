@@ -1,28 +1,25 @@
 // ./src/components/product/ProductItem
 <template>
   <div class="col-md-3">
-    <div class="product">
-      <router-link :to="'/details/'+product._id" class="product-link">
-        <div class="product__image">
-          <img class="img-responsive" :src="product.image" alt="">
-        </div>
-        <div class="product__description">
-          <div class="product__info">
 
-            <small v-if="product.manufacturer">{{product.manufacturer.name}}</small>
-
-            <h4>{{product.name}}</h4>
-          </div>
-          <div class="product__price-cart">
-            ${{product.price}}
-          </div>
+    <b-card :title="product.name"
+            :img-src="product.image"
+            :img-alt="product.name"
+            img-top
+            tag="article"
+            style="max-width: 20rem;"
+            class="mb-2">
+      <div class="product__description">
+        <div class="product__info">
+          <small v-if="product.manufacturer">{{product.manufacturer.name}}</small>
         </div>
-      </router-link>
-      <div class="product__action">
-        <product-button :product="product" :isadmin="isadmin"></product-button>
+        <div class="product__price-cart">
+          ${{product.price}}
+        </div>
       </div>
-    </div>
-  </div>
+      <product-button :product="product" :isadmin="isadmin"></product-button>
+    </b-card>
+   </div>
 </template>
 
 <script>

@@ -1,9 +1,11 @@
 <template>
-  <div class="row">
-    <ul class="text-left">
-      <li v-for="m in manufacturers"><router-link :to="'/admin/manufacturers/edit/' + m._id" class="nav-link">{{m.name}}</router-link></li>
-    </ul>
-  </div>
+  <b-container fluid>
+    <b-row>
+      <b-list-group>
+        <b-list-group-item v-for="m in manufacturers" :key="m._id"><router-link :to="'/admin/manufacturers/edit/' + m._id" class="nav-link">{{m.name}}</router-link></b-list-group-item>
+      </b-list-group>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

@@ -32,14 +32,14 @@
         <span class="small text-danger" v-show="errors.has('description')">Description is required</span>
       </div>
       <div class="form-group row">
-          <button class="button badge-pill" v-on:click.prevent="saveProduct">&nbsp;
+          <b-btn type="button" class="button badge-pill bg-success" v-on:click.prevent="saveProduct">&nbsp;
             <span v-if="isEditing"><span class="oi oi-check"></span>Update</span>
             <span v-else><span class="oi oi-plus"></span>Add</span>
-          </button>
-          <button class="button badge-pill" v-if="isEditing" v-on:click.prevent="deleteProduct">&nbsp;
+          </b-btn>&nbsp;
+          <b-btn type="button" class="button badge-pill bg-danger" v-if="isEditing" v-on:click.prevent="deleteProduct">&nbsp;
             <span class="oi oi-trash"></span>
             Delete
-          </button>
+          </b-btn>
       </div>
 
   </form>

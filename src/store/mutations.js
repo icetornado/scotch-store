@@ -170,11 +170,11 @@ export const manufacturerMutations = {
 
 export const loggingInMutations = {
   [SET_LOGIN_STATE]: (state) => {
-    console.log('set login state here');
+    console.log('set login state in mutation');
     state.isLoggedIn = isLoggedIn();
   },
   [SET_LOGOUT_STATE]: (state) => {
-    console.log('set logout state here');
+    console.log('set logout state in mutation');
     state.isLoggedIn = isLoggedIn();
   },
 

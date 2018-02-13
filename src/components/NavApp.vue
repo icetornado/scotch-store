@@ -1,5 +1,20 @@
 <template>
-  <div class="container-fluid">
+    <b-navbar variant="info" type="dark" :sticky="sticky" class="navbar-expand-md">
+
+      <b-navbar-nav>
+        <b-nav-item to="/">Home</b-nav-item>
+        <b-nav-item to="/cart">Cart <span class="badge badge-light">{{cartCount > 0 ? cartCount: ''}}</span></b-nav-item>
+        <b-nav-item v-show="isLogged" to="/admin/products">Admin</b-nav-item>
+      </b-navbar-nav>
+
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item><button class="btn btn-danger log" @click="handleLogout()" v-show="isLogged">Log out </button></b-nav-item>
+        <b-nav-item><button class="btn btn-info log" @click="handleLogin()" v-show="!isLogged">Log In</button></b-nav-item>
+      </b-navbar-nav>
+
+    </b-navbar>
+
+    <!--
     <ul class="nav navbar bg-info">
       <li class="nav-item">
         <router-link to="/" class="nav-link text-white">Home</router-link>
@@ -20,7 +35,8 @@
         </ul>
       </li>
     </ul>
-  </div>
+    -->
+
 </template>
 
 <script>
@@ -28,11 +44,27 @@
 
   export default {
     name: 'nav-app',
+    // eslint-disable-next-line
+    data: function () {
+      return {
+        sticky: true,
+      };
+    },
     computed: {
       cartCount() {
         return this.$store.state.cart.length;
       },
       isLogged() {
+        console.log('is logged in in store?', this.$store.state.isLoggedIn);
+        if (!this.$store.state.isLoggedIn && isLoggedIn()) {
+          this.$store.dispatch('loggedIn').then((response) => {
+            console.log('logged in response in navbar', response);
+            // ok = true;
+          }).catch((error) => {
+            console.log('log in error in navbar', error);
+            // ok = false;
+          });
+        }
         return this.$store.state.isLoggedIn;
       },
     },
@@ -42,10 +74,6 @@
       },
       handleLogout() {
         logout();
-      },
-      isLoggedIn() {
-        // return true;
-        return isLoggedIn();
       },
     },
   };

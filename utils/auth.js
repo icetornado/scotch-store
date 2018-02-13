@@ -47,7 +47,6 @@ function clearAccessToken() {
 
 // Helper function that will allow us to extract the access_token and id_token
 function getParameterByName(name) {
-  console.log('preg name', name);
   // eslint-disable-next-line
   const match = RegExp('[#&]' + name + '=([^&]*)').exec(window.location.hash);
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
@@ -71,8 +70,11 @@ function isTokenExpired(token) {
 export function logout() {
   clearIdToken();
   clearAccessToken();
-  store.dispatch('loggedOut');
-  router.go('/');
+  store.dispatch('loggedOut').then(() => {
+    router.go('/');
+  }).catch((error) => {
+    console.log('error in logout', error);
+  });
 }
 
 export function getIdToken() {
@@ -111,5 +113,9 @@ export function setIdToken() {
   localStorage.setItem(ID_TOKEN_KEY, idToken);
   // store.dispatch(SET_LOGIN_STATE);
   // console.log('set id token here', idToken);
-  store.dispatch('loggedIn');
+  store.dispatch('loggedIn').then((response) => {
+    console.log('logged in response', response);
+  }).catch((error) => {
+    console.log('log in error', error);
+  });
 }
